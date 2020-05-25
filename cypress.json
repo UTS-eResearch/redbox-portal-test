@@ -1,5 +1,25 @@
 {
   "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:1500"
+  "baseUrl": "http://localhost:1500",
+  "env": {
+    "rdmp": {
+      "title": "my project title",
+      "ethics_human_participant_data_severity_risk": "severity",
+      "ethics_identifiable_other_countries": "Mexico",
+      "ethics_identifiable_data": "interviews",
+      "ethics_identifiable_collection_other_text": "usb thumb drive",
+      "ethics_identifiable_storage_other_text": "folders",
+      "ethics_identifiable_transfered_out_yes_text": "I'll hug them",
+      "ethics_identifiable_deidentify_no_text": "I'll erase them",
+      "ethics_data_destroy_after_retention_what": "code files",
+      "ethics_data_destroy_after_retention_when": "01/01/2021",
+      "dmpt_ethics_dc_access_rights_not_available": "due to sensitive information",
+      "ethics_data_secondary_third_party_security": "Security",
+      "ethics_data_secondary_third_party_disposal": "Disposal",
+      "ethics_data_secondary_third_party_attribution": "Attributions",
+      "ethics_data_secondary_third_party_access_arrangements": "Access Arrangements",
+      "ethics_data_secondary_third_party_other": "Other"
+    }
+  }
 }
 
