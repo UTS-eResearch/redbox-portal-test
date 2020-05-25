@@ -1,0 +1,5 @@
+{
+  "chromeWebSecurity": false,
+  "baseUrl": "http://localhost:1500"
+}
+
