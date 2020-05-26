@@ -4,6 +4,10 @@
   "env": {
     "rdmp": {
       "title": "my project title",
+      "id": "id-1",
+      "description": "description",
+      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_email": "Moises.Sacal@uts.edu.au",
       "ethics_human_participant_data_severity_risk": "severity",
       "ethics_identifiable_other_countries": "Mexico",
       "ethics_identifiable_data": "interviews",
@@ -16,9 +20,18 @@
       "dmpt_ethics_dc_access_rights_not_available": "due to sensitive information",
       "ethics_data_secondary_third_party_security": "Security",
       "ethics_data_secondary_third_party_disposal": "Disposal",
-      "ethics_data_secondary_third_party_attribution": "Attributions",
+      "ethics_data_secondary_third_party_attribution": "Attribution",
       "ethics_data_secondary_third_party_access_arrangements": "Access Arrangements",
       "ethics_data_secondary_third_party_other": "Other"
+    },
+    "rdmp2": {
+      "title": "my cultural indigenous project",
+      "id": "id-2",
+      "description": "description",
+      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_email": "Moises.Sacal@uts.edu.au",
+      "ethics_indigenous_data_ownership": "Data Ownership",
+      "ethics_indigenous_data_access": "Data Access"
     }
   }
 }

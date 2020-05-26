@@ -37,24 +37,24 @@ describe('Fill RDMP', function () {
     });
   });
   it('Should fill identifier', function () {
-    cy.get('#dc\\:identifier').type('id-1', {release: true, force: true});
+    cy.get('#dc\\:identifier').type(rdmp.id, {release: true, force: true});
   });
   it('Should fill description', function () {
-    cy.get('#description').type('description', {release: true});
+    cy.get('#description').type(rdmp.description, {release: true});
   });
   it('Should switch tabs to people', function () {
     cy.get('a[href="#people"]').click();
     cy.wait(1000);
   });
   it('Should input a CI', function () {
-    cy.get('#people').find('input').first().type('Moises Sacal Bonequi{downarrow}{enter}', {
+    cy.get('#people').find('input').first().type(rdmp.ci_name, {
       force: true,
       delay: 0,
       log: true
     });
   });
   it('Should input email of CI', function () {
-    cy.get('#people').find('input[formcontrolname="email"]').first().type('Moises.Sacal@uts.edu.au', {
+    cy.get('#people').find('input[formcontrolname="email"]').first().type(rdmp.ci_email, {
       force: true,
       delay: 0
     });
@@ -78,10 +78,10 @@ describe('Fill RDMP', function () {
     cy.contains('If you are collecting data from residents of countries other than Australia, which countries?');
   });
   it('Outline the potential severity and type of risk to participants from accidental disclosure of the data', function () {
-    cy.get('#ethics_human_participant_data_severity_risk').type('severity');
+    cy.get('#ethics_human_participant_data_severity_risk').type(rdmp.ethics_human_participant_data_severity_risk);
   });
   it('If you are collecting data from residents of countries other than Australia, which countries?', function () {
-    cy.get('#ethics_identifiable_other_countries').type('Mexico');
+    cy.get('#ethics_identifiable_other_countries').type(rdmp.ethics_identifiable_other_countries);
   });
   it('Should switch tabs to ethics', function () {
     cy.get('a[href="#dataCollection"]').click();

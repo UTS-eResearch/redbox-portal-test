@@ -32,7 +32,7 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('shoud get first rdmp', function () {
-    cy.get('.table>tbody>tr>td').contains(rdmp.title).click();
+    cy.contains(rdmp.title).first().click();
     cy.wait(1000);
     cy.contains('Edit this plan').click();
   });
@@ -42,6 +42,7 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_human_participant_data_individual_personal').should('be.checked');
     cy.get('#ethics_human_participant_data_severity_risk').should('have.value', rdmp.ethics_human_participant_data_severity_risk);
     cy.get('#ethics_identifiable_other_countries').should('have.value', rdmp.ethics_identifiable_other_countries);
+    cy.get('#ethics_approval_yes').should('be.checked');
   });
   it('should add content ethics tab', function () {
     cy.get('a[href="#dataCollection"]').click().as('dataCollection');
