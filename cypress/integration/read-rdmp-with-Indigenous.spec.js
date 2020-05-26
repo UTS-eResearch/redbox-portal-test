@@ -39,7 +39,7 @@ describe('Fill RDMP', function () {
   it('check ethics tab', function () {
     cy.get('a[href="#ethics"]').click().as('ethics');
     cy.get('#ethics_describe_indigenous_cultural_intelectual_property').should('be.checked');
-    cy.get('#ethics_describe_indigenous_cultural_intelectual_property').should('be.checked');
+    cy.get('#ethics_describe_other_sensitive').should('be.checked');
     cy.get('#ethics_approval_no').should('be.checked');
   });
   it('should add content retention tab', function () {

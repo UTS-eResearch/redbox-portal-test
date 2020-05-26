@@ -1,4 +1,4 @@
-### redbox-portal end to end testing using Cypress.io framework
+### redbox-portal e2e testing using Cypress.io framework
 
 Used with config-uts-feature-ethics test the creation of data management plans using cypress
 
