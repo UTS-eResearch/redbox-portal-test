@@ -50,7 +50,7 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_identifiable_data').type(rdmp.ethics_identifiable_data);
     cy.get('#ethics_identifiable_collection_other_text').should('have.value', rdmp.ethics_identifiable_collection_other_text);
     cy.get('#ethics_identifiable_transfered_out_yes_text').should('have.value', rdmp.ethics_identifiable_transfered_out_yes_text);
-    cy.get('#ethics_identifiable_deidentify_no_text').should('have.value',rdmp.ethics_identifiable_deidentify_no_text);
+    cy.get('#ethics_identifiable_deidentify_no_text').should('have.value', rdmp.ethics_identifiable_deidentify_no_text);
   });
   it('should add content retention tab', function () {
     cy.get('a[href="#retention"]').click().as('retention');

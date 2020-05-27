@@ -32,6 +32,17 @@
       "ci_email": "Moises.Sacal@uts.edu.au",
       "ethics_indigenous_data_ownership": "Data Ownership",
       "ethics_indigenous_data_access": "Data Access"
+    },
+    "rdmp_iscs": {
+      "title": "my project with iscs value",
+      "id": "id-iscs",
+      "description": "description",
+      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_email": "Moises.Sacal@uts.edu.au",
+      "iscs_sensitive": "ISCS: Sensitive",
+      "iscs_confidential": "ISCS: Confidential",
+      "ethics_indigenous_data_ownership": "Data Ownership",
+      "ethics_indigenous_data_access": "Data Access"
     }
   }
 }
