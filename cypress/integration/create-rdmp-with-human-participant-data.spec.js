@@ -33,8 +33,7 @@ describe('Fill RDMP', function () {
   });
 
   it('Should fill project', function () {
-    cy.get('#title').type(rdmp.title, {release: true}).then(() => {
-    });
+    cy.get('#title').type(rdmp.title, {release: true});
   });
   it('Should fill identifier', function () {
     cy.get('#dc\\:identifier').type(rdmp.id, {release: true, force: true});
