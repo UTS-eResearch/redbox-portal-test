@@ -15,9 +15,15 @@
 
 
 Cypress.Cookies.defaults({
-    whitelist: 'sails.sid'
+  whitelist: 'sails.sid'
 });
 // Import commands.js using ES2015 syntax:
 import './commands';
 // Alternatively you can use CommonJS syntax:
 // require('./commands')
+
+// This is to stop a running test if a test fails.
+Cypress.on('fail', () => {
+  Cypress.stop();
+  Cypress.log({message: 'Cypress has failed and stopped'});
+});

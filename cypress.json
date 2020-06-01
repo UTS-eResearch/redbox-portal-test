@@ -43,6 +43,30 @@
       "iscs_confidential": "ISCS: Confidential",
       "ethics_indigenous_data_ownership": "Data Ownership",
       "ethics_indigenous_data_access": "Data Access"
+    },
+    "rdmp_de_identify": {
+      "title": "my project with de identify",
+      "id": "id-de_identify",
+      "description": "description",
+      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_email": "Moises.Sacal@uts.edu.au",
+      "ethics_human_participant_data_severity_risk": "severity",
+      "ethics_identifiable_other_countries": "Mexico",
+      "ethics_identifiable_data": "interviews",
+      "ethics_identifiable_collection_other_text": "usb thumb drive",
+      "ethics_identifiable_storage_other_text": "folders",
+      "ethics_identifiable_transfered_out_yes_text": "I'll hug them",
+      "ethics_identifiable_deidentify_no_text": "I'll erase them",
+      "ethics_identifiable_deidentify_yes_how_when": "after transcription",
+      "ethics_identifiable_deidentify_yes_where": "person.txt file",
+      "ethics_data_destroy_after_retention_what": "code files",
+      "ethics_data_destroy_after_retention_when": "01/01/2021",
+      "dmpt_ethics_dc_access_rights_not_available": "due to sensitive information",
+      "ethics_data_secondary_third_party_security": "Security",
+      "ethics_data_secondary_third_party_disposal": "Disposal",
+      "ethics_data_secondary_third_party_attribution": "Attribution",
+      "ethics_data_secondary_third_party_access_arrangements": "Access Arrangements",
+      "ethics_data_secondary_third_party_other": "Other"
     }
   }
 }
