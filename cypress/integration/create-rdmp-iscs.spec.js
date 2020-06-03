@@ -106,7 +106,6 @@ describe('Fill RDMP', function () {
   });
   it('Access after the project will be', function () {
     cy.get('#dc\\:accessRights_open\\ access\\ under\\ license').click();
-
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');
@@ -115,7 +114,6 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_indigenous_data_ownership').type(rdmp.ethics_indigenous_data_ownership);
     cy.get('#ethics_indigenous_data_access').type(rdmp.ethics_indigenous_data_access);
   });
-
   it('Should save', function () {
     cy.get('save-button').contains('Save').click().then(() => {
       cy.contains('Saved successfully.');
