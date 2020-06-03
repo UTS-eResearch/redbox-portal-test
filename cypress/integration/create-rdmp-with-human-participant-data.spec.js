@@ -159,7 +159,7 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_data_secondary_third_party_held_publicly_held_international').click();
     cy.contains('Have the data custodian/s, if any, agreed to provide access to the data for use in the proposed research?');
     cy.get('#ethics_data_secondary_third_party_custodians_no').click();
-    cy.contains('What ownership type governs your use of the data?');
+    cy.contains('What ownership agreement governs your use of the data?');
     cy.get('#ethics_data_secondary_third_party_ownership_type_commercial_license').click();
     cy.contains('If your access & use is governed by a license or other agreement, outline any special requirements that we need to be aware of regarding:');
     cy.get('#ethics_data_secondary_third_party_security').type(rdmp.ethics_data_secondary_third_party_security);
