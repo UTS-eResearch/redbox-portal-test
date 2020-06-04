@@ -89,6 +89,12 @@ describe('Fill RDMP', function () {
   });
   it('Please specify other means of collection', function () {
     cy.get('#ethics_identifiable_collection_other_text').type(rdmp.ethics_identifiable_collection_other_text);
+    cy.get('#ethics_identifiable_collection_others').click();
+    cy.wait(2000);
+    cy.get('#modal_ethics_identifiable_collection > div > div').contains('Please specify other means of collection')
+    cy.get('#modal_ethics_identifiable_collection > div > div').contains(rdmp.ethics_identifiable_collection_other_text);
+    cy.get('#modal_ethics_identifiable_collection').contains('No').click();
+    cy.wait(2000);
   });
   it('Where will identifiable or re-identifiable data be stored?', function () {
     cy.get('#ethics_identifiable_storage_onedrive').click();
@@ -96,7 +102,18 @@ describe('Fill RDMP', function () {
   it('Please specify other means of collection', function () {
     cy.get('#ethics_identifiable_storage_other').click();
     cy.contains('Please specify other means of storage');
-    cy.get('#ethics_identifiable_storage_other_text').type(rdmp.ethics_identifiable_storage_other_text)
+    cy.get('#ethics_identifiable_storage_other_text').type(rdmp.ethics_identifiable_storage_other_text);
+    cy.wait(2000);
+  });
+  it('Click other and show confirmation box', function () {
+    cy.get('#ethics_identifiable_storage_other').click();
+    cy.wait(2000);
+    cy.get('#modal_ethics_identifiable_storage > div > div').contains('Please specify other means of storage');
+    cy.get('#modal_ethics_identifiable_storage > div > div').contains(rdmp.ethics_identifiable_storage_other_text);
+    cy.get('#modal_ethics_identifiable_storage > div > div').contains('Yes').click();
+    cy.wait(2000);
+    cy.get('#ethics_identifiable_storage_other_text').should('not.exist');
+    cy.wait(2000);
   });
   it('Will you be seeking prior informed consent to publish identifiable participant data?', function () {
     cy.get('#ethics_identifiable_informed_consent_publish_no').click();
