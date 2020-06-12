@@ -23,7 +23,7 @@ import './commands';
 // require('./commands')
 
 // This is to stop a running test if a test fails.
-Cypress.on('fail', () => {
-  Cypress.stop();
-  Cypress.log({message: 'Cypress has failed and stopped'});
-});
+// Cypress.on('fail', () => {
+//   Cypress.stop();
+//   Cypress.log({message: 'Cypress has failed and stopped'});
+// });

@@ -51,12 +51,9 @@ describe('Fill RDMP', function () {
       delay: 0,
       log: true
     });
-  });
-  it('Should input email of CI', function () {
-    cy.get('#people').find('input[formcontrolname="email"]').first().type(rdmp.ci_email, {
-      force: true,
-      delay: 0
-    });
+    cy.get('#people')
+      .find('div.completer-dropdown')
+      .find('div.completer-row-wrapper').first().click();
     cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
@@ -65,14 +62,14 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains('Will the data that you collect from individuals include (*)');
-    cy.contains('Is any data or information individually identifiable or potentially re-identifiable (i.e. includes codes)?');
+    cy.contains('Will the data that you collect from or about individuals include');
+    cy.contains('Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?');
   });
   it('tick Sensitive personal information ', function () {
     cy.get('#ethics_human_participant_data_individual_personal').click();
   });
   it('tick ethics_identifiable ', function () {
-    cy.get('#ethics_identifiable').click();
+    cy.get('#ethics_identifiable_yes').click();
     cy.contains('Outline the potential severity and type of risk to participants from accidental disclosure of the data');
     cy.contains('If you are collecting data from residents of countries other than Australia, which countries?');
   });

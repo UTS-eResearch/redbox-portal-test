@@ -1,14 +1,33 @@
+const expect = require('chai').expect
+import {loggable} from 'cypress-pipe'
+
+// cypress-pipe does not retry any Cypress commands
+// so we need to click on the element using
+// jQuery method "$el.click()" and not "cy.click()"
+let count = 0
+const click = $el => {
+  count += 1;
+  return $el.click();
+}
+
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
   const rdmp = Cypress.env('rdmp');
 
-  beforeEach(() => {
-    cy.restoreLocalStorage();
-  });
-  afterEach(() => {
-    cy.saveLocalStorage();
-  });
+  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
+  const dmpt_ethics_human_participant_data_individual = 'Will the data that you collect from or about individuals include';
+  const dmpt_ethics_human_participant_data_severity_risk = 'Outline the potential severity and type of risk to participants from accidental disclosure of the data';
+  const dmpt_ethics_identifiable_other_countries = 'If you are collecting data from residents of countries other than Australia, which countries?';
+  const dmpt_ethics_identifiable_deidentify = 'Will you de-identify the data?';
+
+  // Not needed in this spec
+  // beforeEach(() => {
+  //   cy.restoreLocalStorage();
+  // });
+  // afterEach(() => {
+  //   cy.saveLocalStorage();
+  // });
 
   it('Login with CSRF and Read RDMP', function () {
     cy.visit(`/default/rdmp/user/login`);
@@ -25,15 +44,15 @@ describe('Fill RDMP', function () {
     // successful "cy.request" sets all returned cookies, thus we should
     // be able to visit the protected page - we are logged in!
     cy.visit(`/default/rdmp/researcher/home`);
-    cy.wait(2000);
+    cy.wait(500);
     cy.contains('View/Update RDMPs').click({force: true});
     cy.url().should('include', '/default/rdmp/dashboard/rdmp');
     cy.contains('RDMPs');
-    cy.wait(1000);
+    cy.wait(500);
   });
   it('shoud get first rdmp', function () {
     cy.contains(rdmp.title).first().click();
-    cy.wait(1000);
+    cy.wait(500);
     cy.contains('Edit this plan').click();
   });
   it('check ethics tab', function () {
@@ -42,45 +61,85 @@ describe('Fill RDMP', function () {
   });
   it('should alert a confirmation box and click NO', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains('Will the data that you collect from individuals include');
-    cy.contains('Is any data or information individually identifiable or potentially re-identifiable (i.e. includes codes)?');
-    cy.wait(3000);
-    cy.get('#modal_ethics_describe').contains('No').click();
+    cy.contains(dmpt_ethics_human_participant_data_individual);
+    cy.contains(dmpt_ethics_identifiable);
+    cy.wait(500);
+    cy.get('#modal_ethics_describe')
+      .should('be.visible')
+      .contains('button', 'No')
+      .pipe(click)
+      .then(_ => {
+        // Use count for debuging and finding out how long it took to find the element.
+        cy.log(`clicked ${count} times`);
+        count = 0;
+      })
+      .should('not.be.visible');
+    cy.wait(500);
+    cy.get('#ethics_human_participant_data_severity_risk').should('have.value', rdmp.ethics_human_participant_data_severity_risk);
+    cy.get('#ethics_identifiable_other_countries').should('have.value', rdmp.ethics_identifiable_other_countries);
   });
   it('should alert a confirmation box and click YES', function () {
-    cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains('Will the data that you collect from individuals include');
-    cy.contains('Is any data or information individually identifiable or potentially re-identifiable (i.e. includes codes)?');
-    cy.wait(3000);
-    cy.get('#modal_ethics_describe').contains('Yes').click();
-    cy.get('#ethics').should('not.have.value','Will the data that you collect from individuals include');
-    cy.get('#ethics').should('not.have.value','Is any data or information individually identifiable or potentially re-identifiable (i.e. includes codes)?');
-  });
+    cy.get('#ethics_human_participant_data_individual_personal').click();
+    cy.get('#ethics_identifiable_no').click();
+    cy.wait(500);
+    cy.get('#modal_ethics_identifiable')
+      .should('be.visible')
+      .wait(500)
+      .contains('button', 'Yes')
+      .pipe(click)
+      .then(_ => {
+        // Use count for debuging and finding out how long it took to find the element.
+        cy.log(`clicked ${count} times`);
+        count = 0;
+      })
+      .should('not.be.visible');
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_individual);
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable);
+  })
+
   it('should alert a confirmation box for ethics identifiable and click NO', function () {
-    cy.get('#ethics_describe_human_participant_data').should('not.be.checked');
-    cy.wait(1000);
-    cy.get('#ethics_describe_human_participant_data').click();
-    cy.get('#ethics_identifiable').click();
+    cy.get('#ethics_identifiable_yes').click();
+    cy.wait(500);
     cy.get('#ethics_human_participant_data_severity_risk').type(rdmp.ethics_human_participant_data_severity_risk);
     cy.get('#ethics_identifiable_other_countries').type(rdmp.ethics_identifiable_other_countries)
-    cy.wait(2000);
-    cy.get('#ethics_identifiable').click();
-    cy.get('#ethics').should('not.have.value','Outline the potential severity and type of risk to participants from accidental disclosure of the data');
-    cy.get('#ethics').should('not.have.value','If you are collecting data from residents of countries other than Australia, which countries?');
-    cy.wait(2000);
-    cy.get('#modal_ethics_identifiable').contains('No').click();
+    cy.wait(500);
+    cy.get('#ethics_identifiable_no').click();
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_severity_risk);
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable_other_countries);
+    cy.wait(500);
+    cy.get('#modal_ethics_identifiable')
+      .should('be.visible')
+      .contains('button', 'No')
+      .wait(500)
+      .pipe(click)
+      .then(_ => {
+        // Use count for debuging and finding out how long it took to find the element.
+        cy.log(`clicked ${count} times`);
+        count = 0;
+      })
+      .should('not.be.visible');
   });
   it('should alert a confirmation box for ethics identifiable and click YES', function () {
-    cy.get('#ethics_identifiable').should('be.checked');
-    cy.get('#ethics_identifiable').click();
-    cy.contains('Outline the potential severity and type of risk to participants from accidental disclosure of the data');
-    cy.contains('Will you de-identify the data?');
-    cy.wait(3000);
-    cy.get('#modal_ethics_identifiable').contains('Yes').click();
-    cy.get('#ethics').should('not.have.value','Outline the potential severity and type of risk to participants from accidental disclosure of the data');
-    cy.get('#ethics').should('not.have.value','If you are collecting data from residents of countries other than Australia, which countries?');
-    cy.wait(3000);
-    cy.get('#ethics_identifiable').click();
+    cy.get('#ethics_identifiable_yes').should('be.checked');
+    cy.contains(dmpt_ethics_human_participant_data_severity_risk);
+    cy.contains(dmpt_ethics_identifiable_deidentify);
+    cy.wait(500);
+    cy.get('#ethics_identifiable_no').click();
+    cy.get('#modal_ethics_identifiable')
+      .should('be.visible')
+      .wait(500)
+      .contains('button', 'Yes')
+      .pipe(click)
+      .then(_ => {
+        // Use count for debuging and finding out how long it took to find the element.
+        cy.log(`clicked ${count} times`);
+        count = 0;
+      })
+      .should('not.be.visible');
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_severity_risk);
+    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable);
+    cy.wait(500);
+    cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_severity_risk').should('not.have.value');
   });
 });

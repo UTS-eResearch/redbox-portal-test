@@ -10,7 +10,9 @@
   "author": "Moises Sacal",
   "license": "GPL-3.0-or-later",
   "devDependencies": {
-    "cypress": "^4.7.0"
+    "chai": "^4.2.0",
+    "cypress": "^4.8.0",
+    "cypress-pipe": "^1.7.0"
   },
   "dependencies": {
     "fs-extra": "^9.0.0"
