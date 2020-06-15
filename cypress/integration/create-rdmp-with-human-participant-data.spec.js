@@ -96,6 +96,9 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_identifiable_collection_others').click();
     cy.contains('Please specify other means of collection');
   });
+  it('What is the identifiable data?', function () {
+    cy.get('#ethics_identifiable_data').type(rdmp.ethics_identifiable_data);
+  });
   it('Please specify other means of collection', function () {
     cy.get('#ethics_identifiable_collection_other_text').type(rdmp.ethics_identifiable_collection_other_text);
   });

@@ -77,6 +77,16 @@ describe('Fill RDMP', function () {
     cy.wait(500);
     cy.get('#ethics_human_participant_data_severity_risk').should('have.value', rdmp.ethics_human_participant_data_severity_risk);
     cy.get('#ethics_identifiable_other_countries').should('have.value', rdmp.ethics_identifiable_other_countries);
+    cy.get('a[href="#dataCollection"]').click().wait(500).should('be.visible');
+    cy.wait(500);
+    cy.get('#ethics_identifiable_data').should('have.value', rdmp.ethics_identifiable_data);
+    cy.get('#ethics_identifiable_collection_other_text').should('have.value' ,rdmp.ethics_identifiable_collection_other_text);
+    cy.get('#ethics_identifiable_storage_other_text').should('have.value', rdmp.ethics_identifiable_storage_other_text);
+    cy.get('#ethics_identifiable_transfered_out_yes_text').should('have.value', rdmp.ethics_identifiable_transfered_out_yes_text);
+    cy.get('#ethics_identifiable_storage_other_text').should('have.value', rdmp.ethics_identifiable_storage_other_text);
+    cy.get('#ethics_identifiable_deidentify_no_text').should('have.value', rdmp.ethics_identifiable_deidentify_no_text);
+    // Switch back to ethics to continue
+    cy.get('a[href="#ethics"]').click().wait(500).should('be.visible');
   });
   it('should alert a confirmation box and click YES', function () {
     cy.get('#ethics_human_participant_data_individual_personal').click();
@@ -95,6 +105,19 @@ describe('Fill RDMP', function () {
       .should('not.be.visible');
     cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_individual);
     cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable);
+    cy.get('a[href="#dataCollection"]').click().as('dataCollection');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_data');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_collection');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_collection_other_text');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_storage');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_storage_other_text');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_transfered_out');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_transfered_out_yes_text');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_storage_other_text');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_deidentify');
+    cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_deidentify_no_text');
+    // Switch back to ethics to continue
+    cy.get('a[href="#ethics"]').click().as('ethics');
   })
 
   it('should alert a confirmation box for ethics identifiable and click NO', function () {
