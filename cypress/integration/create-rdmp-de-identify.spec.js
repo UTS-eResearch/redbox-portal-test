@@ -3,12 +3,12 @@ describe('Fill RDMP', function () {
   const password = Cypress.env('password');
   const rdmp = Cypress.env('rdmp_de_identify');
 
-  beforeEach(() => {
-    cy.restoreLocalStorage();
-  });
-  afterEach(() => {
-    cy.saveLocalStorage();
-  });
+  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
+  const dmpt_ethics_human_participant_data_individual = 'Will the data that you collect from or about individuals include';
+  const dmpt_ethics_human_participant_data_severity_risk = 'Outline the potential severity and type of risk to participants from accidental disclosure of the data';
+  const dmpt_ethics_identifiable_other_countries = 'If you are collecting data from residents of countries other than Australia, which countries?';
+  const dmpt_ethics_identifiable_deidentify = 'Will you de-identify the data?';
+
 
   it('Login with CSRF and Click Create RDMP', function () {
     cy.visit(`/default/rdmp/user/login`);
@@ -65,9 +65,9 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains('Will the data that you collect from individuals include (*)');
-    cy.contains('Is any data or information individually identifiable or potentially re-identifiable (i.e. includes codes)?');
-    cy.get('#ethics_identifiable').click();
+    cy.contains(dmpt_ethics_identifiable);
+    cy.contains(dmpt_ethics_human_participant_data_individual);
+    cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_individual_personal').click();
   });
   it('Should switch tabs to ethics', function () {
@@ -171,7 +171,7 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Access after the project will be', function () {
-    cy.get('#dc\\:accessRights_open\\ access\\ under\\ license').click();
+    cy.get('#dc\\:accessRights_Open\\ access\\ under\\ license').click();
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');

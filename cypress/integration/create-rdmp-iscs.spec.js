@@ -105,7 +105,7 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Access after the project will be', function () {
-    cy.get('#dc\\:accessRights_open\\ access\\ under\\ license').click();
+    cy.get('#dc\\:accessRights_Open\\ access\\ under\\ license').click();
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');
