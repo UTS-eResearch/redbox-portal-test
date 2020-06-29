@@ -1,6 +1,6 @@
 {
   "chromeWebSecurity": false,
-  "baseUrl": "http://localhost:1500",
+  "baseUrl": "https://dev-redbox.research.uts.edu.au",
   "env": {
     "rdmp": {
       "title": "my project title",
@@ -28,7 +28,7 @@
       "title": "my cultural indigenous project",
       "id": "id-2",
       "description": "description",
-      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_name": "Moises Sacal Bonequi",
       "ci_email": "Moises.Sacal@uts.edu.au",
       "ethics_indigenous_data_ownership": "Data Ownership",
       "ethics_indigenous_data_access": "Data Access"
@@ -37,7 +37,7 @@
       "title": "my project with iscs value",
       "id": "id-iscs",
       "description": "description",
-      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_name": "Moises Sacal Bonequi",
       "ci_email": "Moises.Sacal@uts.edu.au",
       "iscs_sensitive": "ISCS: Sensitive",
       "iscs_confidential": "ISCS: Confidential",
@@ -48,7 +48,7 @@
       "title": "my project with de identify",
       "id": "id-de_identify",
       "description": "description",
-      "ci_name": "Moises Sacal Bonequi{downarrow}{enter}",
+      "ci_name": "Moises Sacal Bonequi",
       "ci_email": "Moises.Sacal@uts.edu.au",
       "ethics_human_participant_data_severity_risk": "severity",
       "ethics_identifiable_other_countries": "Mexico",

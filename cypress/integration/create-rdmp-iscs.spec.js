@@ -51,13 +51,10 @@ describe('Fill RDMP', function () {
       delay: 0,
       log: true
     });
-  });
-  it('Should input email of CI', function () {
-    cy.get('#people').find('input[formcontrolname="email"]').first().type(rdmp.ci_email, {
-      force: true,
-      delay: 0
-    });
-    cy.wait(1000);
+    cy.get('#people')
+      .find('div.completer-dropdown')
+      .find('div.completer-row-wrapper').first().click();
+    cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
     cy.get('a[href="#ethics"]').click().as('ethics');
