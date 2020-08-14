@@ -11,7 +11,7 @@
   "license": "GPL-3.0-or-later",
   "devDependencies": {
     "chai": "^4.2.0",
-    "cypress": "^4.8.0",
+    "cypress": "^4.12.1",
     "cypress-pipe": "^1.7.0"
   },
   "dependencies": {

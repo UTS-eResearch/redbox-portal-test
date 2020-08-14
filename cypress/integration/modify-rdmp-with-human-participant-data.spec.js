@@ -89,7 +89,7 @@ describe('Fill RDMP', function () {
     cy.get('a[href="#ethics"]').click().wait(500).should('be.visible');
   });
   it('should alert a confirmation box and click YES', function () {
-    cy.get('#ethics_human_participant_data_individual_personal').click();
+    cy.get('#ethics_human_participant_data_personal_no').click();
     cy.get('#ethics_identifiable_no').click();
     cy.wait(500);
     cy.get('#modal_ethics_identifiable')

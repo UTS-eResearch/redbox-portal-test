@@ -42,19 +42,13 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Tick describe on ethics to test iscs set', function () {
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_confidential);
+    cy.get('#dmpt_ethics_iscs_iscs_confidential').should('be.checked');
     cy.get('#ethics_describe_animal_use').should('be.checked');
-    cy.get('#ethics_describe_other_sensitive').should('be.checked');
     cy.get('#ethics_describe_clinical_trials').should('be.checked');
-    cy.get('#ethics_describe_indigenous_cultural_intelectual_property').should('be.checked');
     cy.wait(5000);
   });
   it('ethics approval no', function () {
     cy.get('#ethics_approval_no').click();
   })
-  it('Tick Indigenous cultural and intellectual property', function () {
-    cy.get('#ethics_indigenous_data_ownership').should('have.value', rdmp.ethics_indigenous_data_ownership);
-    cy.get('#ethics_indigenous_data_access').should('have.value', rdmp.ethics_indigenous_data_access);
-  });
 
 });

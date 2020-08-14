@@ -39,8 +39,8 @@
       "description": "description",
       "ci_name": "Moises Sacal Bonequi",
       "ci_email": "Moises.Sacal@uts.edu.au",
-      "iscs_sensitive": "ISCS: Sensitive",
-      "iscs_confidential": "ISCS: Confidential"
+      "iscs_sensitive": "UTS Sensitive",
+      "iscs_confidential": "UTS Confidential"
     },
     "rdmp_de_identify": {
       "title": "my project with de identify",

@@ -39,7 +39,7 @@ describe('Fill RDMP', function () {
   it('check ethics tab', function () {
     cy.get('a[href="#ethics"]').click().as('ethics');
     cy.get('#ethics_describe_human_participant_data').should('be.checked');
-    cy.get('#ethics_human_participant_data_individual_personal').should('be.checked');
+      cy.get('#ethics_human_participant_data_personal_yes').should('be.checked');
     cy.get('#ethics_human_participant_data_severity_risk').should('have.value', rdmp.ethics_human_participant_data_severity_risk);
     cy.get('#ethics_identifiable_other_countries').should('have.value', rdmp.ethics_identifiable_other_countries);
     cy.get('#ethics_approval_yes').should('be.checked');

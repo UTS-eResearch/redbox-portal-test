@@ -71,7 +71,7 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_human_participant_data_personal_yes').click();
     cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
     cy.get('#ethics_human_participant_data_health_no').click();
-    cy.get('#ethics_human_participant_data_severity_risk').type('None');
+    cy.get('#ethics_human_participant_data_severity_risk').type(rdmp.ethics_human_participant_data_severity_risk);
   });
   it('If you are collecting data from residents of countries other than Australia, which countries?', function () {
     cy.get('#ethics_identifiable_other_countries').type(rdmp.ethics_identifiable_other_countries);
