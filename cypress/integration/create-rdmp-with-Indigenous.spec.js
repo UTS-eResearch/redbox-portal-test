@@ -3,6 +3,9 @@ describe('Fill RDMP', function () {
   const password = Cypress.env('password');
   const rdmp = Cypress.env('rdmp2');
 
+  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
+  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
+
   beforeEach(() => {
     cy.restoreLocalStorage();
   });
@@ -53,7 +56,7 @@ describe('Fill RDMP', function () {
     });
     cy.get('#people')
       .find('div.completer-dropdown')
-      .find('div.completer-row-wrapper').first().click();
+      .should('include.text', rdmp.ci_name).click();
     cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
@@ -62,7 +65,17 @@ describe('Fill RDMP', function () {
   });
   it('Tick Indigenous cultural and intellectual property', function () {
     cy.get('#ethics_describe_indigenous_cultural_intelectual_property').click();
-    cy.get('#ethics_describe_other_sensitive').click();
+    cy.get('#ethics_describe_other').click();
+  });
+  it('tick Human Participant Data', function () {
+    cy.get('#ethics_describe_human_participant_data').click();
+    cy.contains(dmpt_ethics_identifiable);
+    cy.contains(ethics_human_participant_data_personal);
+    cy.get('#ethics_identifiable_yes').click();
+    cy.get('#ethics_human_participant_data_personal_yes').click();
+    cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
+    cy.get('#ethics_human_participant_data_health_no').click();
+    cy.get('#ethics_human_participant_data_severity_risk').type('None');
   });
   it('ethics approval no', function () {
     cy.get('#ethics_approval_no').click();
@@ -70,12 +83,16 @@ describe('Fill RDMP', function () {
   it('Should switch tabs to ethics', function () {
     cy.get('a[href="#dataCollection"]').click();
     cy.wait(1000);
-  });
-  it('Please provide a brief description of your data collection methodology', function () {
     cy.get('#vivo\\:Dataset_redbox\\:DataCollectionMethodology').type('collection methodology');
-  });
-  it('Predominant file format(s), e.g. xls, txt (*)', function () {
     cy.get('#vivo\\:Dataset_dc_format').type('xls');
+    cy.get('#ethics_identifiable_data').type('excel files');
+    cy.get('#ethics_identifiable_collection_eresearch_store').click();
+    cy.get('#ethics_identifiable_collection_others').click();
+    cy.contains('Please specify other means of collection');
+    cy.get('#ethics_identifiable_informed_consent_publish_no').click();
+    cy.get('#ethics_identifiable_transfered_out_no').click();
+    cy.get('#ethics_identifiable_deidentify_no').click();
+    cy.get('#ethics_identifiable_deidentify_no_text').type('De identify no text');
   });
   it('Should switch tabs to data retention and disposal', function () {
     cy.get('a[href="#retention"]').click();

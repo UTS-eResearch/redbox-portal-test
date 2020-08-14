@@ -53,7 +53,7 @@ describe('Fill RDMP', function () {
     });
     cy.get('#people')
       .find('div.completer-dropdown')
-      .find('div.completer-row-wrapper').first().click();
+      .should('include.text', rdmp.ci_name).click();
     cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
@@ -61,18 +61,15 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Tick describe on ethics to test iscs set', function () {
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_sensitive);
+    cy.get('#dmpt_ethics_iscs_iscs_sensitive').should('be.checked');
     cy.get('#ethics_describe_animal_use').click();
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_sensitive);
+    cy.get('#dmpt_ethics_iscs_iscs_sensitive').should('be.checked');
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_confidential);
+    cy.get('#dmpt_ethics_iscs_iscs_confidential').should('be.checked');
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.get('#ethics_describe_other_sensitive').click();
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_confidential);
+    cy.get('#dmpt_ethics_iscs_iscs_confidential').should('be.checked');
     cy.get('#ethics_describe_clinical_trials').click();
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_confidential);
-    cy.get('#ethics_describe_indigenous_cultural_intelectual_property').click();
-    cy.get('#dmpt_ethics_iscs').should('have.value', rdmp.iscs_confidential);
+    cy.get('#dmpt_ethics_iscs_iscs_confidential').should('be.checked');
     cy.wait(5000);
   });
   it('ethics approval no', function () {
@@ -106,10 +103,6 @@ describe('Fill RDMP', function () {
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');
-  });
-  it('Tick Indigenous cultural and intellectual property', function () {
-    cy.get('#ethics_indigenous_data_ownership').type(rdmp.ethics_indigenous_data_ownership);
-    cy.get('#ethics_indigenous_data_access').type(rdmp.ethics_indigenous_data_access);
   });
   it('Should save', function () {
     cy.get('save-button').contains('Save').click().then(() => {

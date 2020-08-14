@@ -1,6 +1,6 @@
 {
   "chromeWebSecurity": false,
-  "baseUrl": "https://dev-redbox.research.uts.edu.au",
+  "baseUrl": "http://localhost:1500",
   "env": {
     "rdmp": {
       "title": "my project title",
@@ -40,9 +40,7 @@
       "ci_name": "Moises Sacal Bonequi",
       "ci_email": "Moises.Sacal@uts.edu.au",
       "iscs_sensitive": "ISCS: Sensitive",
-      "iscs_confidential": "ISCS: Confidential",
-      "ethics_indigenous_data_ownership": "Data Ownership",
-      "ethics_indigenous_data_access": "Data Access"
+      "iscs_confidential": "ISCS: Confidential"
     },
     "rdmp_de_identify": {
       "title": "my project with de identify",

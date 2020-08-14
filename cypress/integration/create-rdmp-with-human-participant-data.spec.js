@@ -3,6 +3,9 @@ describe('Fill RDMP', function () {
   const password = Cypress.env('password');
   const rdmp = Cypress.env('rdmp');
 
+  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
+  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
+
   beforeEach(() => {
     cy.restoreLocalStorage();
   });
@@ -53,7 +56,7 @@ describe('Fill RDMP', function () {
     });
     cy.get('#people')
       .find('div.completer-dropdown')
-      .find('div.completer-row-wrapper').first().click();
+      .should('include.text', rdmp.ci_name).click();
     cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
@@ -62,24 +65,18 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains('Will the data that you collect from or about individuals include');
-    cy.contains('Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?');
-  });
-  it('tick Sensitive personal information ', function () {
-    cy.get('#ethics_human_participant_data_individual_personal').click();
-  });
-  it('tick ethics_identifiable ', function () {
+    cy.contains(dmpt_ethics_identifiable);
+    cy.contains(ethics_human_participant_data_personal);
     cy.get('#ethics_identifiable_yes').click();
-    cy.contains('Outline the potential severity and type of risk to participants from accidental disclosure of the data');
-    cy.contains('If you are collecting data from residents of countries other than Australia, which countries?');
-  });
-  it('Outline the potential severity and type of risk to participants from accidental disclosure of the data', function () {
-    cy.get('#ethics_human_participant_data_severity_risk').type(rdmp.ethics_human_participant_data_severity_risk);
+    cy.get('#ethics_human_participant_data_personal_yes').click();
+    cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
+    cy.get('#ethics_human_participant_data_health_no').click();
+    cy.get('#ethics_human_participant_data_severity_risk').type('None');
   });
   it('If you are collecting data from residents of countries other than Australia, which countries?', function () {
     cy.get('#ethics_identifiable_other_countries').type(rdmp.ethics_identifiable_other_countries);
   });
-  it('Should switch tabs to ethics', function () {
+  it('Should switch tabs to data Collection', function () {
     cy.get('a[href="#dataCollection"]').click();
     cy.wait(1000);
   });

@@ -4,11 +4,7 @@ describe('Fill RDMP', function () {
   const rdmp = Cypress.env('rdmp_de_identify');
 
   const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
-  const dmpt_ethics_human_participant_data_individual = 'Will the data that you collect from or about individuals include';
-  const dmpt_ethics_human_participant_data_severity_risk = 'Outline the potential severity and type of risk to participants from accidental disclosure of the data';
-  const dmpt_ethics_identifiable_other_countries = 'If you are collecting data from residents of countries other than Australia, which countries?';
-  const dmpt_ethics_identifiable_deidentify = 'Will you de-identify the data?';
-
+  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
 
   it('Login with CSRF and Click Create RDMP', function () {
     cy.visit(`/default/rdmp/user/login`);
@@ -48,12 +44,12 @@ describe('Fill RDMP', function () {
   it('Should input a CI', function () {
     cy.get('#people').find('input').first().type(rdmp.ci_name, {
       force: true,
-      delay: 0,
+      delay: 2,
       log: true
     });
     cy.get('#people')
       .find('div.completer-dropdown')
-      .find('div.completer-row-wrapper').first().click();
+      .should('include.text', rdmp.ci_name).click();
     cy.wait(2000);
   });
   it('Should switch tabs to ethics', function () {
@@ -63,27 +59,24 @@ describe('Fill RDMP', function () {
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
     cy.contains(dmpt_ethics_identifiable);
-    cy.contains(dmpt_ethics_human_participant_data_individual);
+    cy.contains(ethics_human_participant_data_personal);
     cy.get('#ethics_identifiable_yes').click();
-    cy.get('#ethics_human_participant_data_individual_personal').click();
+    cy.get('#ethics_human_participant_data_personal_yes').click();
+    cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
+    cy.get('#ethics_human_participant_data_health_no').click();
+    cy.get('#ethics_human_participant_data_severity_risk').type('None');
   });
-  it('Should switch tabs to ethics', function () {
+  it('Should switch tabs to data collection', function () {
     cy.get('a[href="#dataCollection"]').click();
     cy.wait(1000);
-  });
-  it('Please provide a brief description of your data collection methodology', function () {
     cy.get('#vivo\\:Dataset_redbox\\:DataCollectionMethodology').type('collection methodology');
-  });
-  it('Predominant file format(s), e.g. xls, txt (*)', function () {
     cy.get('#vivo\\:Dataset_dc_format').type('xls');
-  });
-  it('What platforms or tools will you use to collect or import identifiable or re-identifiable data?', function () {
+    cy.get('#ethics_identifiable_data').type('excel files');
     cy.get('#ethics_identifiable_collection_eresearch_store').click();
-  });
-  it('What platforms or tools will you use to collect or import identifiable or re-identifiable data? - others', function () {
     cy.get('#ethics_identifiable_collection_others').click();
     cy.contains('Please specify other means of collection');
   });
+
   it('Please specify other means of collection', function () {
     cy.get('#ethics_identifiable_collection_other_text').type(rdmp.ethics_identifiable_collection_other_text);
     cy.get('#ethics_identifiable_collection_others').click();
