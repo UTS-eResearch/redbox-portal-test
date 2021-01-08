@@ -1,6 +1,7 @@
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
+  const base = Cypress.env('base');
   const rdmp = Cypress.env('rdmp');
 
   beforeEach(() => {

@@ -1,7 +1,7 @@
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
-  const rdmp = Cypress.env('rdmp2');
+  const rdmp = Cypress.env('rdmp_indigenous');
 
   beforeEach(() => {
     cy.restoreLocalStorage();

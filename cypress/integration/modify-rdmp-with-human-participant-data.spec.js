@@ -13,13 +13,8 @@ const click = $el => {
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
+  const base = Cypress.env('base');
   const rdmp = Cypress.env('rdmp');
-
-  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
-  const dmpt_ethics_human_participant_data_individual = 'Will the data that you collect from or about individuals include';
-  const dmpt_ethics_human_participant_data_severity_risk = 'Outline the potential severity and type of risk to participants from accidental disclosure of the data';
-  const dmpt_ethics_identifiable_other_countries = 'If you are collecting data from residents of countries other than Australia, which countries?';
-  const dmpt_ethics_identifiable_deidentify = 'Will you de-identify the data?';
 
   // Not needed in this spec
   // beforeEach(() => {
@@ -61,8 +56,8 @@ describe('Fill RDMP', function () {
   });
   it('should alert a confirmation box and click NO', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains(dmpt_ethics_human_participant_data_individual);
-    cy.contains(dmpt_ethics_identifiable);
+    cy.contains(base.dmpt_ethics_human_participant_data_individual);
+    cy.contains(base.dmpt_ethics_identifiable);
     cy.wait(500);
     cy.get('#modal_ethics_describe')
       .should('be.visible')
@@ -103,8 +98,8 @@ describe('Fill RDMP', function () {
         count = 0;
       })
       .should('not.be.visible');
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_individual);
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable);
+    cy.get('#ethics').should('not.have.value', base.dmpt_ethics_human_participant_data_individual);
+    cy.get('#ethics').should('not.have.value', base.dmpt_ethics_identifiable);
     cy.get('a[href="#dataCollection"]').click().as('dataCollection');
     cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_data');
     cy.get('#dataCollection').should('not.have.value', '#ethics_identifiable_collection');
@@ -127,8 +122,8 @@ describe('Fill RDMP', function () {
     cy.get('#ethics_identifiable_other_countries').type(rdmp.ethics_identifiable_other_countries)
     cy.wait(500);
     cy.get('#ethics_identifiable_no').click();
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_severity_risk);
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable_other_countries);
+    cy.get('#ethics').should('not.have.value', base.dmpt_ethics_human_participant_data_severity_risk);
+    cy.get('#ethics').should('not.have.value', base.mpt_ethics_identifiable_other_countries);
     cy.wait(500);
     cy.get('#modal_ethics_identifiable')
       .should('be.visible')
@@ -144,8 +139,8 @@ describe('Fill RDMP', function () {
   });
   it('should alert a confirmation box for ethics identifiable and click YES', function () {
     cy.get('#ethics_identifiable_yes').should('be.checked');
-    cy.contains(dmpt_ethics_human_participant_data_severity_risk);
-    cy.contains(dmpt_ethics_identifiable_deidentify);
+    cy.contains(base.dmpt_ethics_human_participant_data_severity_risk);
+    cy.contains(base.dmpt_ethics_identifiable_deidentify);
     cy.wait(500);
     cy.get('#ethics_identifiable_no').click();
     cy.get('#modal_ethics_identifiable')
@@ -159,8 +154,8 @@ describe('Fill RDMP', function () {
         count = 0;
       })
       .should('not.be.visible');
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_human_participant_data_severity_risk);
-    cy.get('#ethics').should('not.have.value', dmpt_ethics_identifiable);
+    cy.get('#ethics').should('not.have.value', base.dmpt_ethics_human_participant_data_severity_risk);
+    cy.get('#ethics').should('not.have.value', base.dmpt_ethics_identifiable);
     cy.wait(500);
     cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_severity_risk').should('not.have.value');

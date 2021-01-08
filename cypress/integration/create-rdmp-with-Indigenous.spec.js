@@ -1,10 +1,8 @@
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
-  const rdmp = Cypress.env('rdmp2');
-
-  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
-  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
+  const base = Cypress.env('base');
+  const rdmp = Cypress.env('rdmp_indigenous');
 
   beforeEach(() => {
     cy.restoreLocalStorage();
@@ -69,8 +67,8 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains(dmpt_ethics_identifiable);
-    cy.contains(ethics_human_participant_data_personal);
+    cy.contains(base.dmpt_ethics_identifiable);
+    cy.contains(base.ethics_human_participant_data_personal);
     cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_personal_yes').click();
     cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
@@ -108,7 +106,7 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Access after the project will be', function () {
-    cy.get('#dc\\:accessRights_Open\\ access\\ under\\ license').click();
+    cy.get('#dc\\:accessRights_open').click();
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');

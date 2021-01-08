@@ -1,10 +1,8 @@
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
+  const base = Cypress.env('base');
   const rdmp = Cypress.env('rdmp');
-
-  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
-  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
 
   beforeEach(() => {
     cy.restoreLocalStorage();
@@ -65,8 +63,8 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains(dmpt_ethics_identifiable);
-    cy.contains(ethics_human_participant_data_personal);
+    cy.contains(base.dmpt_ethics_identifiable);
+    cy.contains(base.ethics_human_participant_data_personal);
     cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_personal_yes').click();
     cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
@@ -109,17 +107,17 @@ describe('Fill RDMP', function () {
   });
   it('Will you be seeking prior informed consent to publish identifiable participant data?', function () {
     cy.get('#ethics_identifiable_informed_consent_publish_no').click();
-    cy.contains('What additional security will be applied to identifiable data:');
+    cy.contains(base.ethics_identifiable_informed_consent_publish_no);
     cy.get('#ethics_identifiable_additional_security_physical_lock').click();
   });
   it('Will identifiable data be transferred in or out of secure UTS storage (e.g. in from linkage agency, out for transcription)?', function () {
     cy.get('#ethics_identifiable_transfered_out_yes').click();
-    cy.contains('Describe how you will maintain data security during transfer:');
+    cy.contains(base.ethics_identifiable_transfered_out_yes);
     cy.get('#ethics_identifiable_transfered_out_yes_text').type(rdmp.ethics_identifiable_transfered_out_yes_text);
   });
   it('Will you de-identify the data?', function () {
     cy.get('#ethics_identifiable_deidentify_no').click();
-    cy.contains('Explain why you will not be able to de-identify the data');
+    cy.contains(base.ethics_identifiable_deidentify_no);
     cy.get('#ethics_identifiable_deidentify_no_text').type(rdmp.ethics_identifiable_deidentify_no_text);
   });
   it('Should switch tabs to data retention and disposal', function () {
@@ -145,8 +143,8 @@ describe('Fill RDMP', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');
   });
   it('Access after the project will be', function () {
-    cy.get('#dc\\:accessRights_not\\ available\\ due\\ to\\ sensitivities').click();
-    cy.contains('Briefly state why the data cannot be available');
+    cy.get('#dc\\:accessRights_none').click();
+    cy.contains(base.dmpt_ethics_dc_access_rights_not_available);
     cy.get('#dmpt_ethics_dc_access_rights_not_available').type(rdmp.dmpt_ethics_dc_access_rights_not_available);
   });
   it('Are you using any secondary or third-party data?', function () {
@@ -157,7 +155,7 @@ describe('Fill RDMP', function () {
     cy.contains('Have the data custodian/s, if any, agreed to provide access to the data for use in the proposed research?');
     cy.get('#ethics_data_secondary_third_party_custodians_no').click();
     cy.contains('What ownership agreement governs your use of the data?');
-    cy.get('#ethics_data_secondary_third_party_ownership_type_commercial_license').click();
+    cy.get('#ethics_data_secondary_third_party_ownership_type_commercial_licence').click();
     cy.contains('If your access & use is governed by a license or other agreement, outline any special requirements that we need to be aware of regarding:');
     cy.get('#ethics_data_secondary_third_party_security').type(rdmp.ethics_data_secondary_third_party_security);
     cy.get('#ethics_data_secondary_third_party_disposal').type(rdmp.ethics_data_secondary_third_party_disposal);

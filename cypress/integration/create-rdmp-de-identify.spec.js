@@ -1,10 +1,8 @@
 describe('Fill RDMP', function () {
   const username = Cypress.env('username');
   const password = Cypress.env('password');
+  const base = Cypress.env('base');
   const rdmp = Cypress.env('rdmp_de_identify');
-
-  const dmpt_ethics_identifiable = 'Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?';
-  const ethics_human_participant_data_personal = 'Will the data that you collect from or about individuals include personal information';
 
   it('Login with CSRF and Click Create RDMP', function () {
     cy.visit(`/default/rdmp/user/login`);
@@ -58,8 +56,8 @@ describe('Fill RDMP', function () {
   });
   it('tick Human Participant Data', function () {
     cy.get('#ethics_describe_human_participant_data').click();
-    cy.contains(dmpt_ethics_identifiable);
-    cy.contains(ethics_human_participant_data_personal);
+    cy.contains(base.dmpt_ethics_identifiable);
+    cy.contains(base.ethics_human_participant_data_health);
     cy.get('#ethics_identifiable_yes').click();
     cy.get('#ethics_human_participant_data_personal_yes').click();
     cy.get('#ethics_human_participant_data_sensitive_personal_no').click();
@@ -107,17 +105,17 @@ describe('Fill RDMP', function () {
   });
   it('Will you be seeking prior informed consent to publish identifiable participant data?', function () {
     cy.get('#ethics_identifiable_informed_consent_publish_no').click();
-    cy.contains('What additional security will be applied to identifiable data:');
+    cy.contains(base.ethics_identifiable_informed_consent_publish_no);
     cy.get('#ethics_identifiable_additional_security_physical_lock').click();
   });
   it('Will identifiable data be transferred in or out of secure UTS storage (e.g. in from linkage agency, out for transcription)?', function () {
     cy.get('#ethics_identifiable_transfered_out_yes').click();
-    cy.contains('Describe how you will maintain data security during transfer:');
+    cy.contains(base.ethics_identifiable_transfered_out_yes);
     cy.get('#ethics_identifiable_transfered_out_yes_text').type(rdmp.ethics_identifiable_transfered_out_yes_text);
   });
   it('Will you de-identify the data? No', function () {
     cy.get('#ethics_identifiable_deidentify_no').click();
-    cy.contains('Explain why you will not be able to de-identify the data');
+    cy.contains(base.ethics_identifiable_deidentify_no);
     cy.get('#ethics_identifiable_deidentify_no_text').type(rdmp.ethics_identifiable_deidentify_no_text);
     cy.wait(3000);
   });
@@ -132,15 +130,15 @@ describe('Fill RDMP', function () {
     cy.contains('Explain why you will not be able to de-identify the data');
     cy.wait(3000);
     cy.get('#modal_ethics_identifiable_deidentify').contains('Yes').click();
-    cy.contains('Outline how and when (e.g. after transcription, before analysis) you will de-identify the data:');
+    cy.contains(base.ethics_identifiable_deidentify_yes_how_when);
     cy.get('#ethics_identifiable_deidentify_yes_how_when').type(rdmp.ethics_identifiable_deidentify_yes_how_when);
-    cy.contains('Where will any link files (files that match pseduonyms/codes to identifiable information) be stored?');
+    cy.contains(base.ethics_identifiable_deidentify_yes_where);
     cy.get('#ethics_identifiable_deidentify_yes_where').type(rdmp.ethics_identifiable_deidentify_yes_where);
   });
   it('Will you de-identify the data? No', function () {
     cy.get('#ethics_identifiable_deidentify_no').click();
-    cy.get('#modal_ethics_identifiable_deidentify').contains('Outline how and when (e.g. after transcription, before analysis) you will de-identify the data:');
-    cy.get('#modal_ethics_identifiable_deidentify').contains('Where will any link files (files that match pseduonyms/codes to identifiable information) be stored?');
+    cy.get('#modal_ethics_identifiable_deidentify').contains(base.ethics_identifiable_deidentify_yes_where);
+    cy.get('#modal_ethics_identifiable_deidentify').contains(base.ethics_identifiable_deidentify_yes_how_when);
     cy.wait(3000);
     cy.get('#modal_ethics_identifiable_deidentify').contains('No').click();
   });
@@ -161,7 +159,7 @@ describe('Fill RDMP', function () {
     cy.wait(1000);
   });
   it('Access after the project will be', function () {
-    cy.get('#dc\\:accessRights_Open\\ access\\ under\\ license').click();
+    cy.get('#dc\\:accessRights_open').click();
   });
   it('Copyright and intellectual property owners of data created in project', function () {
     cy.get('#dc\\:rightsHolder_dc\\:name').select('student');

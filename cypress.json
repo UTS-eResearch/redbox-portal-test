@@ -2,8 +2,23 @@
   "chromeWebSecurity": false,
   "baseUrl": "http://localhost:1500",
   "env": {
+    "base": {
+      "dmpt_ethics_identifiable": "Will any data or information be individually identifiable or potentially re-identifiable (i.e. include codes) at any stage of the research?",
+      "ethics_human_participant_data_personal": "Will the data you collect from individuals include sensitive personal information other than health information?",
+      "ethics_human_participant_data_health": "Will the data you collect from individuals include health information?",
+      "ethics_identifiable_informed_consent_publish_no": "What additional security will be applied to identifiable or re-identifiable data:",
+      "ethics_identifiable_transfered_out_yes": "Describe how you will maintain data security during transfer:",
+      "ethics_identifiable_deidentify_no": "Explain why you will not be able to de-identify the data",
+      "ethics_identifiable_deidentify_yes_how_when": "Outline how and when (e.g. after transcription, before analysis) you will de-identify the data:",
+      "ethics_identifiable_deidentify_yes_where": "Where will any link files (files that match pseudonyms/codes to identifiable information) be stored?",
+      "dmpt_ethics_identifiable_deidentify": "Will you de-identify the data?",
+      "dmpt_ethics_human_participant_data_individual": "Will the data you collect from individuals include personal information?",
+      "dmpt_ethics_human_participant_data_severity_risk": "Outline any potential risk to participants from accidental disclosure of the data and any strategies for minimising those risks",
+      "dmpt_ethics_identifiable_other_countries": "If you are collecting data from residents of countries other than Australia, which countries?",
+      "dmpt_ethics_dc_access_rights_not_available": "Briefly state why the data cannot be available:"
+    },
     "rdmp": {
-      "title": "my project title",
+      "title": "my human participant data",
       "id": "id-1",
       "description": "description",
       "ci_name": "Moises Sacal Bonequi",
@@ -24,7 +39,7 @@
       "ethics_data_secondary_third_party_access_arrangements": "Access Arrangements",
       "ethics_data_secondary_third_party_other": "Other"
     },
-    "rdmp2": {
+    "rdmp_indigenous": {
       "title": "my cultural indigenous project",
       "id": "id-2",
       "description": "description",
